@@ -49,6 +49,7 @@ export type MotionPresetId =
 
 export interface MotionConfig {
   preset: MotionPresetId;
+  type?: MotionPresetId;
   duration: number;
   loop: boolean;
   direction: 'normal' | 'reverse' | 'alternate';

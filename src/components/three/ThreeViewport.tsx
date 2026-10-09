@@ -362,21 +362,40 @@ const ThreeViewportInner: React.FC<ThreeViewportProps> = ({
         }
 
         // Apply motion engine behaviors
-        if (motion && motion.type !== 'none' && !isDraggingRef.current) {
-          elapsedMotionTime += delta * motion.speed;
+        const motionType = (motion?.preset || motion?.type || 'none') as string;
+        const isMotionPlaying = motion?.isPlaying !== false;
 
-          switch (motion.type) {
+        if (motion && motionType !== 'none' && !isDraggingRef.current && isMotionPlaying) {
+          elapsedMotionTime += delta * (motion.speed ?? 1.0);
+
+          switch (motionType) {
+            case 'spin-y':
             case 'spin':
               groupRef.current.rotation.y += delta * 1.5;
               break;
 
+            case 'spin-x':
+              groupRef.current.rotation.x += delta * 1.5;
+              break;
+
+            case 'spin-z':
             case 'pendulum':
               groupRef.current.rotation.z = Math.sin(elapsedMotionTime * 2.0) * 0.45;
+              break;
+
+            case 'tumble':
+              groupRef.current.rotation.x += delta * 0.8;
+              groupRef.current.rotation.y += delta * 1.2;
+              groupRef.current.rotation.z += delta * 0.4;
               break;
 
             case 'float':
               groupRef.current.position.y = Math.sin(elapsedMotionTime * 2.2) * 0.2;
               groupRef.current.rotation.y += delta * 0.6;
+              break;
+
+            case 'bounce':
+              groupRef.current.position.y = Math.abs(Math.sin(elapsedMotionTime * 3.5)) * 0.35;
               break;
 
             case 'pulse': {
@@ -414,7 +433,11 @@ const ThreeViewportInner: React.FC<ThreeViewportProps> = ({
               groupRef.current.rotation.x = Math.sin(elapsedMotionTime * 0.8) * 0.15;
               break;
 
-            case 'none':
+            case 'reveal':
+              groupRef.current.rotation.y = Math.sin(elapsedMotionTime * 1.5) * 0.8;
+              groupRef.current.position.z = Math.sin(elapsedMotionTime * 1.5) * 0.2;
+              break;
+
             default:
               break;
           }
