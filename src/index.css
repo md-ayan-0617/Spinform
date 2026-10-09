@@ -1,0 +1,294 @@
+/* =====================================================
+   SPINFORM — 3D IDENTITY + MOTION STUDIO
+   CORE DESIGN SYSTEM & TOKENS
+   ===================================================== */
+
+:root {
+  /* Brand Palette */
+  --paper: #F3F1E9;
+  --ink: #111111;
+  --graphite: #1B1D20;
+  --panel: #E6E3D9;
+  --electric-blue: #2457FF;
+  --machine-orange: #FF5B2D;
+  --acid: #D8FF3E;
+  --lavender: #A88CFF;
+  --cyan: #63E6E2;
+  --steel: #BFC3C7;
+  --warm-grey: #A9A69D;
+  --white: #FBFAF5;
+
+  /* Dark Tool / Studio Theme */
+  --studio-bg: #16171A;
+  --studio-panel: #202226;
+  --studio-panel-alt: #282A30;
+  --studio-border: #36383D;
+  --studio-border-focus: #5A5D66;
+  --studio-text: #F1EFE9;
+  --studio-muted: #898C92;
+
+  /* Typography */
+  --font-display: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Onest', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Chivo Mono', monospace;
+  --font-impact: 'Anton', sans-serif;
+
+  /* Typographic Scale */
+  --text-mega: clamp(90px, 14vw, 245px);
+  --text-hero: clamp(64px, 9vw, 165px);
+  --text-h1: clamp(52px, 7vw, 120px);
+  --text-h2: clamp(38px, 5vw, 86px);
+  --text-h3: clamp(26px, 3.2vw, 48px);
+  --text-body-lg: clamp(19px, 2vw, 25px);
+  --text-body: clamp(15px, 1.5vw, 18px);
+  --text-ui: 14px;
+  --text-mono: 12px;
+  --text-mono-sm: 11px;
+
+  /* Motion Curves */
+  --ease-ui: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-snap: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-route: cubic-bezier(0.76, 0, 0.24, 1);
+  --transition-fast: 0.18s var(--ease-ui);
+  --transition-normal: 0.3s var(--ease-ui);
+
+  /* Elevation & Technical Details */
+  --border-width: 1px;
+  --border-solid: 1px solid var(--ink);
+  --border-studio: 1px solid var(--studio-border);
+  --header-height: 72px;
+}
+
+/* Base resets */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--acid);
+  color: var(--ink);
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+/* Technical font */
+.mono {
+  font-family: var(--font-mono);
+  letter-spacing: -0.01em;
+}
+
+.impact-word {
+  font-family: var(--font-impact);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Links and buttons */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ink);
+  border-radius: 0px;
+}
+
+body.dark-mode::-webkit-scrollbar-track,
+.studio-root::-webkit-scrollbar-track {
+  background: var(--studio-bg);
+}
+
+body.dark-mode::-webkit-scrollbar-thumb,
+.studio-root::-webkit-scrollbar-thumb {
+  background: var(--studio-border);
+}
+
+/* Industrial Machine Details */
+.corner-tick {
+  position: relative;
+}
+.corner-tick::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  width: 6px;
+  height: 6px;
+  border-top: 2px solid currentColor;
+  border-left: 2px solid currentColor;
+  pointer-events: none;
+}
+.corner-tick::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  right: -1px;
+  width: 6px;
+  height: 6px;
+  border-bottom: 2px solid currentColor;
+  border-right: 2px solid currentColor;
+  pointer-events: none;
+}
+
+/* Grid backgrounds */
+.bg-grid-subtle {
+  background-image: 
+    linear-gradient(to right, rgba(17, 17, 17, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(17, 17, 17, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.bg-grid-dark {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Mechanical Button Classes */
+.btn-machine {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background-color: var(--electric-blue);
+  color: var(--white);
+  border: 1px solid var(--ink);
+  border-radius: 0px;
+  transition: transform 0.1s var(--ease-ui), background-color 0.2s var(--ease-ui), color 0.2s var(--ease-ui);
+  user-select: none;
+  white-space: nowrap;
+}
+
+.btn-machine:hover {
+  background-color: var(--acid);
+  color: var(--ink);
+  transform: translateY(-2px);
+}
+
+.btn-machine:active {
+  transform: translateY(1px);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 24px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  background-color: transparent;
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: 0px;
+  transition: background-color 0.18s var(--ease-ui), color 0.18s var(--ease-ui);
+}
+
+.btn-secondary:hover {
+  background-color: var(--ink);
+  color: var(--paper);
+}
+
+.btn-secondary:active {
+  transform: translateY(1px);
+}
+
+/* Badges and Tags */
+.tech-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  background-color: var(--panel);
+  color: var(--ink);
+  border: 1px solid rgba(17, 17, 17, 0.2);
+  letter-spacing: 0.04em;
+}
+
+.tech-tag-dark {
+  background-color: var(--studio-panel);
+  color: var(--acid);
+  border: 1px solid var(--studio-border);
+}
+
+/* Animations */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.3; }
+}
+
+.animate-spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 64px;
+  }
+  
+  .btn-machine, .btn-secondary {
+    padding: 12px 20px;
+    font-size: 12px;
+  }
+}
